@@ -12,6 +12,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 
 @Entity
 @Table(name = "tb_category")
@@ -22,9 +23,10 @@ public class Category implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String name;
+	
+	@Transient
+	private Set<Product> produts = new HashSet<>();
 
-	
-	
 	public Category() {
 	}
 
@@ -50,8 +52,10 @@ public class Category implements Serializable {
 		this.name = name;
 	}
 
+	public Set<Product> getProduts() {
+		return produts;
+	}
 
-	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
